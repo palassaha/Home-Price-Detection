@@ -19,50 +19,54 @@ def model_predict(area, bhk, bath, location_input):
         x[loc_index] = 1
     return round(demo.predict([x])[0],2)
 
-st.set_page_config(page_title="Home Price Prediction App")
+def main():
+    st.set_page_config(page_title="Home Price Prediction App")
 
-hide_default_format = """
+    hide_default_format = """
        <style>
        #MainMenu {visibility: hidden; }
        footer {visibility: hidden;}
-       </style>
+        </style>
        """
-st.markdown(hide_default_format, unsafe_allow_html=True)
-st.title('Price Prediction App')
-st.write("Welcome to the Price Prediction App!")
+    st.markdown(hide_default_format, unsafe_allow_html=True)
+    st.title('Price Prediction App')
+    st.write("Welcome to the Price Prediction App!")
 
 
-left, right = st.columns(2)
-with left:     
-           area = st.text_input("Area (sq. feet)")
-           bhk = st.selectbox("BHK", [1, 2, 3, 4, 5])
-with right:
-           bath = st.selectbox("Bathrooms", [1, 2, 3, 4, 5] )
-           location_input = st.selectbox("Location" , location)
+    left, right = st.columns(2)
+    with left:     
+             area = st.text_input("Area (sq. feet)")
+             bhk = st.selectbox("BHK", [1, 2, 3, 4, 5])
+    with right:
+             bath = st.selectbox("Bathrooms", [1, 2, 3, 4, 5] )
+             location_input = st.selectbox("Location", location)
 
-col1 , col2 , col3 , col4 , col5 = st.columns(5)
-with col1:     
-           pass
-with col2:
-          pass
-with col3:
+    col1 , col2 , col3 , col4 , col5 = st.columns(5)
+    with col1:     
+         pass
+    with col2:
+        pass
+    with col3:
              submit_button = st.button("Predict Price")
-with col4:
-          pass
-with col5:
-          pass
+    with col4:
+         pass
+    with col5:
+         pass
 
 
+    process = False
 
-process = False
-
-if submit_button:
-            result = model_predict(area, bhk, bath, location_input)
-            process = True
-
+    if submit_button:
+         result = model_predict(area, bhk, bath, location_input)
+         process = True
 
 
-if process==True:
-                 st.success('Price Detected! Price : {}'.format(result), icon="✅")
-else:
-     st.warning('Waiting for input...', icon="⏳")
+    if process==True:
+         st.success('Price Detected! Price : {} lakh'.format(result), icon="✅")
+    else:
+         st.warning('Waiting for input...', icon="⏳")
+
+
+if __name__ == "__main__":
+     main()
+             
